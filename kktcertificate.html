@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Certificate</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>KKtyping Certificate</h1>
+        
+        <!-- Form to input data -->
+        <form id="certificateForm">
+            <label for="name">Enter Name:</label>
+            <input type="text" id="name" placeholder="Name" required>
+
+            <label for="date">Enter Date:</label>
+            <p type="date" id="date" ></p>
+            <p id="wpm"><input id="wpm"></p>
+            <p id="mpm"><input id="mpm"></p>
+            <p id="cpm"><input id="cpm"></p>
+
+            <button type="submit">Get Certificate</button>
+        </form>
+        
+        <!-- Button to download PDF -->
+        <button id="downloadBtn" style="display: none;">Download PDF</button>
+    </div>
+    <script>
+        // Retrieve the query parameter from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const wpm = urlParams.get('wpm'); // Get 'message' parameter
+        const mpm = urlParams.get('mpm'); 
+        const cpm = urlParams.get('cpm'); 
+
+        // Display the received message
+        document.getElementById('wpm').innerText = `WPM Message: ${wpm}`;
+        document.getElementById('mpm').innerText = `MPM Message: ${mpm}`;
+        document.getElementById('cpm').innerText = `CPM Message: ${cpm}`;
+
+
+
+
+
+        // Function to set the current date as the default value
+        function setCurrentDate() {
+            const date = new Date(); // Get current date
+            const year = date.getFullYear(); // Get the full year (e.g., 2025)
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // Get the month (01-12)
+            const day = String(date.getDate()).padStart(2, '0'); // Get the day (01-31)
+
+            const currentDate = `${year}-${month}-${day}`; // Format the date as yyyy-mm-dd
+            document.getElementById('date').value = currentDate; // Set the value of the input
+        }
+
+        // Call the function when the page loads
+        window.onload = setCurrentDate;
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
